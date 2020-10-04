@@ -76,6 +76,27 @@ let controller = {
 
 }
 
+function parseGuess(guess) {
+    var alphabet = ["A", "B", "C", "D", "E", "F", "G"];
+
+    if (guess === null || guess.length !== 2) {
+        alert("Oops, please enter a letter and number on the board.");
+    } else {
+        var alphaChar = guess.charAt(0);
+        var row = alphabet.indexOf(alphaChar);
+
+        var column = guess.charAt(1);
+        if (isNaN(row) || isNaN(column)) {
+            alert("Oops, " + guess + " isn't on the board.");
+        } else if (row < 0 || row >= model.boardSize || column < 0 || column >= model.boardSize) {
+            alert("Oops, " + guess + " is off the board!");
+        } else {
+            return row + column;
+        }
+    }
+    return null;
+}
+
 function init() {
     var fireButton = document.getElementById("fireButton");
     fireButton.onclick = handleFireButton;
